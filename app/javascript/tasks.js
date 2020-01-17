@@ -30,17 +30,16 @@ $(function() {
       task: {
         done: doneValue
       }
-    }).success(function(data) {
+    }).done(function(data) {
       var liHtml = taskHtml(data);
       var $li = $("#listItem-" + data.id);
       $li.replaceWith(liHtml);
       $('.toggle').change(toggleTask);
 
-    } );
     });
   }
 
-  $.get("/tasks").success( function( data ) {
+  $.get("/tasks").done( function( data ) {
     var htmlString = "";
 
     $.each(data, function(index,  task) {
@@ -62,7 +61,8 @@ $(function() {
         title: textbox.val()
       }
     };
-    $.post("/tasks", payload).success(function(data) {
+    $.post("/tasks", payload).done(function(data) {
+      console.log(data);
       var htmlString = taskHtml(data);
       var ulTodos = $('.todo-list');
       ulTodos.append(htmlString);
